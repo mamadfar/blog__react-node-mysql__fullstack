@@ -11,5 +11,7 @@ export const loginService = (user: Omit<IUser, "email">) => {
     });
 }
 export const logoutService = () => {
-    return API.get("/auth/logout");
+    return API.get("/auth/logout", {
+        withCredentials: true
+    });
 }

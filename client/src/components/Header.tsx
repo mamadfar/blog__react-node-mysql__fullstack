@@ -1,8 +1,11 @@
 import "./Header.scss";
 import logo from "../assets/img/logo.png";
 import {Link} from "react-router-dom";
+import {useAuth} from "../hooks/useAuth";
 
 const Header = () => {
+    const {user, logout} = useAuth();
+
     return (
         <header>
             <div className="navbar">
@@ -31,8 +34,8 @@ const Header = () => {
                         <Link to="/?cat=food" className="link">
                             <h6>FOOD</h6>
                         </Link>
-                        <span>John</span>
-                        <span>Logout</span>
+                        <span>{user?.username}</span>
+                        {user ? <span onClick={logout}>Logout</span> : <Link to="/login" className="link">Login</Link>}
                         <span className="write-link">
                             <Link to="/write" className="link">Write</Link>
                         </span>

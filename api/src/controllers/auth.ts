@@ -49,20 +49,29 @@ export const login = (
       data[0].password
     );
     if (!isPasswordCorrect) {
-        return res.status(400).json("Wrong username or password!");
-    };
+      return res.status(400).json("Wrong username or password!");
+    }
 
     //? jwt token
     const token = jwt.sign({ id: data[0].id }, "jwtkey");
-    const {password, ...other} = data[0];
+    const { password, ...other } = data[0];
 
     //? cookie
-    res.cookie("access_token", token, {
-      httpOnly: true,
-      path: "/login"
-    }).status(200).json(other);
+    res
+      .cookie("access_token", token, {
+        httpOnly: true
+      })
+      .status(200)
+      .json(other);
   });
 };
 
 //! Logout
-export const logout = (req: Request, res: Response) => {};
+export const logout = (req: Request, res: Response) => {
+  res.clearCookie("access_token", {
+      sameSite: "none",
+      secure: true,
+    })
+    .status(200)
+    .json("User has been logged out.");
+};
