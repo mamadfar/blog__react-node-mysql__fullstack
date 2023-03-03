@@ -1,0 +1,48 @@
+@use "../assets/scss/var";
+
+.navbar {
+  &>.container {
+	padding: 10px 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	.logo {
+	  width: 120px;
+	}
+
+	.links {
+	  display: flex;
+	  align-items: center;
+	  gap: 10px;
+
+	  h6 {
+		font-size: 16px;
+		font-weight: 300;
+	  }
+
+	  span {
+		cursor: pointer;
+	  }
+
+	  .write-link {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: var.$lightGreen;
+		width: 50px;
+		height: 50px;
+		border: 1px solid white;
+		border-radius: 50%;
+		font-weight: 300;
+		transition: background-color 0.3s, color 0.3s, border 0.3s;
+
+		&:hover {
+		  color: teal;
+		  background-color: white;
+		  border: 1px solid teal;
+		}
+	  }
+	}
+  }
+}

@@ -1,0 +1,16 @@
+@use "../assets/scss/var";
+
+.button {
+  width: max-content;
+  padding: 10px 20px;
+  background-color: white;
+  color: teal;
+  border: 1px solid teal;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border 0.3s;
+  &:hover {
+	border: 1px solid white;
+	background-color: var.$lightGreen;
+	color: black;
+  }
+}

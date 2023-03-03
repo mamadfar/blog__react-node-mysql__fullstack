@@ -1,0 +1,23 @@
+@use "./assets/scss/var";
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  &>.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 1024px;
+    .link {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+}

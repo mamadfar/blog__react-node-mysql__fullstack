@@ -1,0 +1,20 @@
+@use "../assets/scss/var";
+
+footer {
+  display: flex;
+  align-items: center;
+  margin-top: auto;
+  .footer {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 100px;
+    padding: 20px;
+    background-color: var.$lightGreen;
+    font-size: 12px;
+    img {
+      width: 50px;
+    }
+  }
+}
