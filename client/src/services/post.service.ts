@@ -11,3 +11,15 @@ export const deletePostService = (id: string | undefined) => {
         withCredentials: true
     });
 }
+
+export const uploadPostImgService = (file: FormData) => {
+    return API.post(`/upload`, file, {
+        withCredentials: true
+    });
+}
+
+export const createPostService = (post: FormData) => {
+    return API.post(`/posts`, post, {
+        withCredentials: true
+    });
+}

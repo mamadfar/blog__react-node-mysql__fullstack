@@ -57,7 +57,7 @@ const SinglePost = () => {
                     </div>
                     {user?.username === post?.username && (
                         <div className="single-post__content__user-edit">
-                            <Link to={`/write?edit=${post?.id}`}>
+                            <Link to={`/write?edit=${post?.id}`} state={post}>
                                 <img src={Edit} alt="edit"/>
                             </Link>
                             <img src={Delete} alt="delete" onClick={deletePost}/>

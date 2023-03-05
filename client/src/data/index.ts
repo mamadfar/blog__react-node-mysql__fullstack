@@ -5,6 +5,44 @@ interface IPost {
     desc: string;
     img: string;
 }
+interface ICategories {
+    id: number;
+    name: string;
+    value: string;
+}
+
+export const CATEGORIES: ReadonlyArray<ICategories> = [
+    {
+        id: 1,
+        name: "art",
+        value: "art"
+    },
+    {
+        id: 2,
+        name: "science",
+        value: "science"
+    },
+    {
+        id: 3,
+        name: "technology",
+        value: "technology"
+    },
+    {
+        id: 4,
+        name: "cinema",
+        value: "cinema"
+    },
+    {
+        id: 5,
+        name: "design",
+        value: "design"
+    },
+    {
+        id: 6,
+        name: "food",
+        value: "food"
+    }
+];
 
 export const POSTS:ReadonlyArray<IPost> = [
     {

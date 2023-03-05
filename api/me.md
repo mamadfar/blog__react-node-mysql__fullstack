@@ -13,3 +13,4 @@
 ```
 7. npm i dotenv cors @types/cors morgan @types/morgan cookie-parser @types/cookie-parser jsonwebtoken @types/jsonwebtoken bcryptjs @types/bcryptjs
 8. cat cotrollers routes
+9. `npm i multer @types/multer` to handle file in node
