@@ -4,6 +4,7 @@ import {Button} from "../components";
 import {useEffect, useState} from "react";
 import {IPost} from "../model/post.model";
 import {getPostsService} from "../services/post.service";
+import parse from "html-react-parser";
 
 const Home = () => {
     const [posts, setPosts] = useState<IPost[]>([]);
@@ -25,6 +26,10 @@ const Home = () => {
         getPosts();
     }, [search])
 
+    const getText = (html: string) => {
+
+    }
+
     return (
         <div className="home">
             <div className="posts">
@@ -37,7 +42,7 @@ const Home = () => {
                             <Link to={`/post/${post.id}`} className="link">
                                 <h1>{post.title}</h1>
                             </Link>
-                            <p>{post.desc}</p>
+                            <p>{parse(post.desc)}</p>
                             <Button title="Read More"/>
                         </div>
                     </div>

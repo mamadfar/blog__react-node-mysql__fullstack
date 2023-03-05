@@ -6,7 +6,7 @@ import cookieParser from "cookie-parser";
 import postRoute from "./routes/posts";
 import authRoute from "./routes/auth";
 import usersRoute from "./routes/users";
-import multer from "multer";
+import path from "path";
 
 const app = express();
 
@@ -15,6 +15,7 @@ dotenv.config(); //? for using .env
 const PORT = process.env.PORT || 8800;
 
 app.use(express.json()); //? for sending json
+app.use(express.urlencoded({extended: false}));
 app.use(cookieParser()); //? for pars cookie and send with req
 app.use(morgan("dev")); //? loger
 app.use(
@@ -24,17 +25,7 @@ app.use(
     credentials: true,
   })
 );
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'tmp/uploads/')
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + file.originalname)
-  }
-});
-
-const upload = multer({ storage });
+app.use(express.static("tmp"));
 
 //? Rules of our API
 app.use((req, res, next) => {
@@ -55,11 +46,6 @@ app.use((req, res, next) => {
 app.use("/api/posts", postRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
-
-app.post('/api/upload', upload.single('file'), (req, res) => {
-  const file = req.file;
-  res.status(200).json(file?.originalname);
-})
 
 //? Health check
 app.get("/ping", (req, res, next) => res.status(200).json({ message: "pong" }));

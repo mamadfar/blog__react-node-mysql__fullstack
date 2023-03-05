@@ -3,48 +3,46 @@ import "./Write.scss";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import Categories from "./components/Categories";
-import {createPostService, uploadPostImgService} from "../../services/post.service";
-import {useLocation} from "react-router-dom";
+import {createPostService, updatePostService, uploadPostImgService} from "../../services/post.service";
+import {useLocation, useNavigate} from "react-router-dom";
+import moment from "moment";
 
 const Write = () => {
     const {state} = useLocation();
+    const navigate = useNavigate();
 
     const [desc, setDesc] = useState<string>(state?.desc || '');
     const [title, setTitle] = useState(state?.title || "");
-    const [file, setFile] = useState<FileList | null>(null);
+    const [file, setFile] = useState<FileList | null | string>(state?.img || null);
     const [cat, setCat] = useState(state?.cat || "");
-
-
-    const uploadFile = async () => {
-        const formData = new FormData();
-        formData.append("file", file![0]);
-        try {
-            return await uploadPostImgService(formData);
-        } catch (e) {
-            console.log(e);
-        }
-    }
 
     const onSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        const upload = await uploadFile();
 
-        if (upload?.status === 200) {
-            const formData = new FormData();
-            formData.append("title", title);
-            formData.append("desc", desc);
-            formData.append("cat", cat);
-            formData.append("img", upload?.data);
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("desc", desc);
+        formData.append("cat", cat);
+        // formData.append("img", (typeof imgUrl === "string") ? imgUrl : imgUrl?.data);
+        if (file != null) {
+            formData.append("img", typeof file === "string" ? file : file[0]);
+        }
+        formData.append("date", moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"));
 
-            try {
+        try {
+            if (!state) {
                 const {data, status} = await createPostService(formData);
-                console.log(data)
-
-            } catch (e) {
-                console.log(e);
+                if (status === 201) {
+                    navigate("/");
+                }
+            } else {
+                const {data, status} = await updatePostService(state.id, formData);
+                if (status === 200) {
+                    navigate(-1);
+                }
             }
-        } else {
-            console.log("Something went wrong!")
+        } catch (e) {
+            console.log(e);
         }
     }
 

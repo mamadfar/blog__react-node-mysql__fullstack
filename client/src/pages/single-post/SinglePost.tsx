@@ -8,6 +8,7 @@ import {IPostWithUser} from "../../model/post.model";
 import {deletePostService, getPostService} from "../../services/post.service";
 import moment from "moment";
 import {useAuth} from "../../hooks/useAuth";
+import parse from "html-react-parser";
 
 const SinglePost = () => {
     const [post, setPost] = useState<IPostWithUser>();
@@ -65,7 +66,7 @@ const SinglePost = () => {
                     )}
                 </div>
                 <h1>{post?.title}</h1>
-                <div>{post?.desc}</div>
+                <div>{post?.desc && parse(post.desc)}</div>
             </div>
             <Menu cat={post?.cat}/>
         </div>
