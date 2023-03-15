@@ -1,5 +1,5 @@
 import "./Home.scss";
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {Button} from "../components";
 import {useEffect, useState} from "react";
 import {IPost} from "../model/post.model";
@@ -9,7 +9,8 @@ import parse from "html-react-parser";
 const Home = () => {
     const [posts, setPosts] = useState<IPost[]>([]);
 
-    const {search} = useLocation()
+    const {search} = useLocation();
+    const navigation = useNavigate();
 
     const getPosts = async () => {
         try {
@@ -26,10 +27,6 @@ const Home = () => {
         getPosts();
     }, [search])
 
-    const getText = (html: string) => {
-
-    }
-
     return (
         <div className="home">
             <div className="posts">
@@ -43,7 +40,7 @@ const Home = () => {
                                 <h1>{post.title}</h1>
                             </Link>
                             <p>{parse(post.desc)}</p>
-                            <Button title="Read More"/>
+                            <Button title="Read More" handler={() => navigation(`/post/${post.id}`)}/>
                         </div>
                     </div>
                 ))}

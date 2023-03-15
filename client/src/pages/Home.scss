@@ -9,6 +9,7 @@
 
 	.post {
 	  display: flex;
+	  align-items: center;
 	  gap: 100px;
 	  &:nth-child(2n+1) {
 		flex-direction: row-reverse;
@@ -17,6 +18,7 @@
 	  &__img {
 		flex: 2;
 		position: relative;
+		height: 100%;
 		&::after {
 		  content: "";
 		  width: 100%;

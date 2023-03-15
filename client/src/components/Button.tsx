@@ -1,9 +1,9 @@
 import {FC} from 'react';
 import "./Button.scss";
 
-const Button:FC<{title: string}> = ({title}) => {
+const Button:FC<{title: string, handler?: () => void}> = ({title, handler}) => {
     return (
-        <button className="button">{title}</button>
+        <button className="button" onClick={handler}>{title}</button>
     );
 }
 
